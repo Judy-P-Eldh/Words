@@ -69,10 +69,11 @@ namespace Words.Pages
             var goodGuesses = CorrectGuesses;
             var badGuesses = IncorrectGuesses;
             var ord = RandomWord;
-            var guess = Guess.ToLower();
+           
 
-            if (!string.IsNullOrEmpty(guess) && _checkWords.IsLetterSingle(guess))
+            if (!string.IsNullOrEmpty(Guess) && _checkWords.IsLetterSingle(Guess))
             {
+                var guess = Guess.ToLower();
                 var ch = guess[0];
 
                 if (goodGuesses.Contains(ch) || badGuesses.Contains(ch))
