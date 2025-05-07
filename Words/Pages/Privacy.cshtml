@@ -5,12 +5,23 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Det här ordspelet är under utveckling.</p>
-
-<p>Har du frågor eller önskemål får du gärna mejla.</p>
-<a class="btn btn-success"
+<div class="card text-center mt-5 mb-5">
+  <div class="card-header lead">
+    Aktuell info
+  </div>
+  <div class="card-body">
+    <h5 class="card-title dsplay-4 p-2">Under utveckling</h5>
+    <p class="card-text lead">Det här ordspelet är under utveckling. Därför saknas viss funktionalitet och ny tillkommer ibland.</p>
+    <p class="card-text lead">Har du frågor eller önskemål får du gärna mejla.</p>
+<a class="btn btn-success btn-lg mt-5 mb-5"
    href="mailto:@Model.ContactEmail?subject=Fr%C3%A5ga%20om%20ordspelet&amp;body=Hej,%20jag%20har%20en%20fr%C3%A5ga%20om%20ordspelet.">
     Skicka mejl
-</a>
+</a>  </div>
+  <div class="card-footer text-body-secondary text-sm">
+    Uppdaterad: 2025-05-08
+  </div>
+</div>
+
+
 
 

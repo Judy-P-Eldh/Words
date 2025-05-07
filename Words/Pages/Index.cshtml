@@ -4,50 +4,53 @@
     ViewData["Title"] = "Home page";
 }
 
-<button id="theme-toggle" type="button">Byt tema</button>
-
-<div class="text-center">
-    <h1 class="display-4">Vi ska spela "Words"</h1>
-    <p>Du ska gissa rätt ord genom att gissa på en bokstav i taget.</p>
-</div>
-
-<form method="post" asp-page-handler="StartGame">
+<!-- Full-width jumbotron -->
+<div class="py-5">
+  <div class="container text-center">
+    <h1 class="display-4 p-2">Hej och välkommen! Vi ska spela "Words".</h1>
+    <p class="lead">Det går ut på att gissa rätt ord.</p>
+    <hr class="my-4">
+  <form method="post" asp-page-handler="StartGame">
     <div class="form-group">
-        <h3>Regler</h3>
-        <p>Du får gissa på en bokstav i taget till dess du klarar att gissa hela ordet.</p>
-        <p>Klicka på "Starta spelet" när du är redo att starta.</p>
-        <button type="submit" class="btn btn-success mb-5">Starta spelet</button>
+        <h3 class="dsplay-4 p-2">Regler</h3>
+        <p class="lead">Du får gissa på en bokstav i taget till dess du klarar att gissa hela ordet.</p>
+        <p class="lead">Klicka på "Starta spelet" när du är redo att starta.</p>
+        <button type="submit" class="btn btn-success btn-lg mb-5 mt-5">Starta spelet</button>
     </div>
 </form>
+  </div>
+</div>
+
+
 
 @if (!string.IsNullOrEmpty(Model.Message))
 {
-    <div class="alert alert-info">@Model.Message</div>
+        <div class="alert alert-info">@Model.Message</div>
 }
 
- @if (!string.IsNullOrEmpty(Model.RandomWord))
- {
-        <div>
-            @for (int i = 0; i < Model.RandomWord.Length; i++)
-            {
-                var ch = Model.CorrectGuesses.Contains(Model.RandomWord[i]) ? Model.RandomWord[i].ToString() : "";
-                <span class="letter-box">@ch</span>
-            }
-        </div>
-        <form method="post" asp-page-handler="MakeGuess">
-            <div class="form-group mt-5">
-                <label for="guess">Gissa med en bokstav:</label>
-                <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control" maxlength="1" />
+@if (!string.IsNullOrEmpty(Model.RandomWord))
+{
+            <div>
+        @for (int i = 0; i < Model.RandomWord.Length; i++)
+        {
+            var ch = Model.CorrectGuesses.Contains(Model.RandomWord[i]) ? Model.RandomWord[i].ToString() : "";
+                        <span class="letter-box">@ch</span>
+        }
             </div>
-            <button type="submit" class="btn btn-secondary mt-5">Gissa</button>
-        </form>
+            <form method="post" asp-page-handler="MakeGuess">
+                <div class="form-group mt-5">
+                    <label for="guess">Gissa med en bokstav:</label>
+                    <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control" maxlength="1" />
+                </div>
+                <button type="submit" class="btn btn-secondary mt-5">Gissa</button>
+            </form>
 
-        <div class="mt-5">
-            <p>Fel gissningar: @string.Join(", ", Model.IncorrectGuesses)</p>
-            <p>Rätt gissningar: @string.Join(", ", Model.CorrectGuesses)</p>
-            @* <p>Antal fel gissningar kvar: Model.MaxIncorrectGuesses - Model.IncorrectGuesses.Count</p> *@
-        </div>
- }
+            <div class="mt-5">
+                <p>Fel gissningar: @string.Join(", ", Model.IncorrectGuesses)</p>
+                <p>Rätt gissningar: @string.Join(", ", Model.CorrectGuesses)</p>
+        @* <p>Antal fel gissningar kvar: Model.MaxIncorrectGuesses - Model.IncorrectGuesses.Count</p> *@
+            </div>
+}
 <div class="modal fade" id="winModal" tabindex="-1" aria-labelledby="winModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
@@ -73,12 +76,12 @@
 
 @if (Model.HasWon)
 {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var winModal = new bootstrap.Modal(document.getElementById('winModal'));
-            winModal.show();
-        });
-    </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var winModal = new bootstrap.Modal(document.getElementById('winModal'));
+                winModal.show();
+            });
+        </script>
 }
 
 
