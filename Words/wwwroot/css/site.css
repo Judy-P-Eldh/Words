@@ -45,6 +45,10 @@ body {
     vertical-align: middle;
 }
 
+html.dark-mode .letter-box {
+    border-color: #fff;
+}
+
 .card {
     background-color: var(--background-color) !important;
     color: var(--text-color) !important;
