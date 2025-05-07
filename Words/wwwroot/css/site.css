@@ -17,9 +17,23 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
 }
+
+html.dark-mode {
+    --background-color: #1e1e1e;
+    --text-color: #ffffff;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
 
 .letter-box {
     display: inline-block;
