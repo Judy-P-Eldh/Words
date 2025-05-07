@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Cryptography;
 using System.Text.Json;
 using Words.Services;
 
@@ -18,23 +19,31 @@ namespace Words.Pages
 
         public string RandomWord
         {
-            get => HttpContext.Session.GetString("RandomWord");
+            get => HttpContext.Session.GetString("RandomWord") ?? "";
             set => HttpContext.Session.SetString("RandomWord", value);
         }
         public List<char> CorrectGuesses
         {
-            get => HttpContext.Session.GetString("CorrectGuesses") != null
-                ? JsonSerializer.Deserialize<List<char>>(HttpContext.Session.GetString("CorrectGuesses"))
-                : new List<char>();
+            get
+            {
+                var json = HttpContext.Session.GetString("CorrectGuesses");
+                return json != null ? JsonSerializer.Deserialize<List<char>>(json) ?? new List<char>() : new List<char>();
+            }
             set => HttpContext.Session.SetString("CorrectGuesses", JsonSerializer.Serialize(value));
+
         }
+     
         public List<char> IncorrectGuesses
         {
-            get => HttpContext.Session.GetString("IncorrectGuesses") != null
-                ? JsonSerializer.Deserialize<List<char>>(HttpContext.Session.GetString("IncorrectGuesses"))
-                : new List<char>();
+            get
+            {
+                var json = HttpContext.Session.GetString("IncorrectGuesses");
+                return json != null ? JsonSerializer.Deserialize<List<char>>(json) ?? new List<char>() : new List<char>();
+            }
             set => HttpContext.Session.SetString("IncorrectGuesses", JsonSerializer.Serialize(value));
+
         }
+
         [BindProperty]
         public bool GameStarted { get; set; }
         [BindProperty]
@@ -69,7 +78,10 @@ namespace Words.Pages
             var goodGuesses = CorrectGuesses;
             var badGuesses = IncorrectGuesses;
             var ord = RandomWord;
-           
+            if (string.IsNullOrEmpty(ord))
+            {
+                Message = $"Något blev fel. Prova att starta om spelet.";
+            }
 
             if (!string.IsNullOrEmpty(Guess) && _checkWords.IsLetterSingle(Guess))
             {

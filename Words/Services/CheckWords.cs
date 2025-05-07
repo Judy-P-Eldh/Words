@@ -8,7 +8,7 @@ namespace Words.Services
         public string randomWord { get; private set; }
         public CheckWords(WordList wordList)
         {
-            _wordList = wordList;
+            _wordList = wordList ?? throw new ArgumentNullException(nameof(wordList));
         }
        
         public string GenerateRandomWord()
