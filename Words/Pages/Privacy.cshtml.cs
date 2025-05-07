@@ -7,7 +7,7 @@ namespace Words.Pages
     {
         private readonly ILogger<PrivacyModel> _logger;
         private readonly IConfiguration _configuration;
-        public string ContactEmail { get; set; }
+        public string? ContactEmail { get; set; }
 
         public PrivacyModel(ILogger<PrivacyModel> logger, IConfiguration configuration)
         {
