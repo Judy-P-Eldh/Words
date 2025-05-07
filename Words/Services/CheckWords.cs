@@ -5,10 +5,10 @@ namespace Words.Services
     public class CheckWords    : ICheckWords
     {
         private readonly WordList _wordList;
-        public string randomWord { get; private set; }
+        public string? randomWord { get; private set; }
         public CheckWords(WordList wordList)
         {
-            _wordList = wordList ?? throw new ArgumentNullException(nameof(wordList));
+            _wordList = wordList;
         }
        
         public string GenerateRandomWord()
