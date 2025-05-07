@@ -42,6 +42,7 @@ namespace Words.Pages
         [BindProperty]
         public string Guess { get; set; }  = string.Empty;
         public int NumberOfLetters { get; set; }
+        [TempData]
         public string? Message { get; set; }
 
 

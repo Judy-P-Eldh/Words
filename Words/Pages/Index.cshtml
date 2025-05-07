@@ -19,9 +19,11 @@
     </div>
 </form>
 
-<div class="text-center">
-    <p>@Model.Message</p>
-</div>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
 
 
     @if (!string.IsNullOrEmpty(Model.RandomWord))
