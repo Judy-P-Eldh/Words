@@ -111,6 +111,13 @@ namespace Words.Pages
         {
             return word.All(c => guesses.Contains(c));
         }
-
+        public IActionResult OnPostQuitGame()
+        {
+            HttpContext.Session.Remove("RandomWord");
+            HttpContext.Session.Remove("CorrectGuesses");
+            HttpContext.Session.Remove("IncorrectGuesses");
+            // Eventuellt visa ett tack-meddelande
+            return RedirectToPage();
+        }
     }
 }
