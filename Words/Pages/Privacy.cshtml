@@ -1,8 +1,16 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Kontakt";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>Det här ordspelet är under utveckling.</p>
+
+<p>Har du frågor eller önskemål får du gärna mejla.</p>
+<a class="btn btn-success"
+   href="mailto:@Model.ContactEmail?subject=Fr%C3%A5ga%20om%20ordspelet&amp;body=Hej,%20jag%20har%20en%20fr%C3%A5ga%20om%20ordspelet.">
+    Skicka mejl
+</a>
+
+
