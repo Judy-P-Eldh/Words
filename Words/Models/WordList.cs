@@ -1,0 +1,110 @@
+﻿namespace Words.Models
+{
+    public class WordList
+    {
+       public List<string> wordsDone = new List<string>();
+        private List<string> Words = new List<string>
+        {
+           "gungstol",
+           "träben",
+           "skratta",
+           "fyr",
+           "laddstolpe",
+           "lurar",
+           "strädgård",
+           "skog",
+           "skogsmaskin",
+           "apa",
+           "katt",
+           "hund",
+           "bil",
+           "cykel",
+           "båt",
+           "hus",
+           "skola",
+           "dator",
+           "telefon",
+           "klocka",
+           "fönster",
+           "dörr",
+           "vägg",
+           "tak",
+           "golv",
+           "säng",
+           "soffa",
+           "stol",
+           "bord",
+           "matta",
+           "skåp",
+           "hylla",
+           "bokhylla",
+           "tvättmaskin",
+           "diskmaskin",
+           "ugn",
+           "bok",
+           "tidning",
+           "papper",
+           "penna",
+           "blyertspenna",
+           "färgpennor",
+           "kritor",
+           "målarfärg",
+           "pensel",
+           "lim",
+           "klistermärke",
+           "klister",
+           "mat",
+           "dryck",
+           "kläder",
+           "skor",
+           "vantar",
+           "halsduk",
+           "jacka",
+           "byxor",
+           "skjorta",
+           "klänning",
+           "strumpor",
+           "morgonrock",
+           "pyjamas",
+           "piano",
+           "gitarr",
+           "trummor",
+           "fiol",
+           "saxofon",
+           "trumpet",
+           "instrument",
+           "musik",
+           "dans",
+           "teater",
+           "film",
+           "bokhandel",
+           "affär",
+           "restaurang",
+           "kafeteria",
+           "biograf",
+           "museum",
+           "park",
+           "strand",
+           "sjö",
+           "hav",
+           "fjäll",
+           "dal"
+        };
+        public List<string> GetWords()
+        {
+            return Words;
+        }
+        public string GetRandomWord()
+        {
+            Random random = new Random();
+            int index = random.Next(Words.Count);
+            return Words[index];
+        }
+
+        public List<string> GuessedWords(string word)
+        {
+             wordsDone.Add(word);
+            return wordsDone;
+        }
+    }
+}

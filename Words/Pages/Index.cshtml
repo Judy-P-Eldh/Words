@@ -1,0 +1,53 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Vi ska spela "Words"</h1>
+    <p>Du ska gissa rätt ord genom att gissa på en bokstav i taget.</p>
+</div>
+
+<form method="post" asp-page-handler="StartGame">
+    <div class="form-group">
+        <h3>Regler</h3>
+        <p>Du får gissa på en bokstav i taget till dess du klarar att gissa hela ordet.</p>
+        <p>Klicka på "Starta spelet" när du är redo att starta.</p>
+        <button type="submit" class="btn btn-success mb-5">Starta spelet</button>
+    </div>
+</form>
+
+<div class="text-center">
+    <p>@Model.Message</p>
+</div>
+
+
+    @if (!string.IsNullOrEmpty(Model.RandomWord))
+    {
+        <div>
+            @for (int i = 0; i < Model.RandomWord.Length; i++)
+            {
+                var ch = Model.CorrectGuesses.Contains(Model.RandomWord[i]) ? Model.RandomWord[i].ToString() : "";
+                <span class="letter-box">@ch</span>
+            }
+        </div>
+        <form method="post" asp-page-handler="MakeGuess">
+            <div class="form-group mt-5">
+                <label for="guess">Gissa med en bokstav:</label>
+                <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control" maxlength="1" />
+            </div>
+            <button type="submit" class="btn btn-secondary mt-5">Gissa</button>
+        </form>
+
+        <div class="mt-5">
+            <p>Fel gissningar: @string.Join(", ", Model.IncorrectGuesses)</p>
+            <p>Rätt gissningar: @string.Join(", ", Model.CorrectGuesses)</p>
+            @* <p>Antal fel gissningar kvar: Model.MaxIncorrectGuesses - Model.IncorrectGuesses.Count</p> *@
+        </div>
+  
+    }
+
+
+
