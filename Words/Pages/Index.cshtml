@@ -24,6 +24,12 @@
     <div class="alert alert-info">@Model.Message</div>
 }
 
+@if (Model.HasWon)
+{
+    <form method="post" asp-page-handler="StartGame">
+        <button type="submit" class="btn btn-success m-5">Starta nytt spel</button>
+    </form>
+}
 
 
     @if (!string.IsNullOrEmpty(Model.RandomWord))

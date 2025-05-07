@@ -44,6 +44,8 @@ namespace Words.Pages
         public int NumberOfLetters { get; set; }
         [TempData]
         public string? Message { get; set; }
+        [TempData]
+        public bool HasWon { get; set; }
 
 
 
@@ -82,6 +84,12 @@ namespace Words.Pages
                     goodGuesses.Add(ch);
                     CorrectGuesses = goodGuesses;
                     Message = "Bra gissat!";
+                    // Kolla om alla bokstäver är gissade
+                    if (IsWordGuessed(ord, goodGuesses))
+                    {
+                        HasWon = true;
+                        Message = $"Grattis! Du klarade ordet \"{ord}\". Vill du spela igen?";
+                    }
                 }
                 else
                 {
@@ -98,5 +106,10 @@ namespace Words.Pages
 
             return RedirectToPage();
         }
+        private bool IsWordGuessed(string word, List<char> guesses)
+        {
+            return word.All(c => guesses.Contains(c));
+        }
+
     }
 }
