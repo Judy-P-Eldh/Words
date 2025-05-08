@@ -35,6 +35,9 @@ body {
 }
 
 .letter-box {
+    flex: 0 0 auto; /* Förhindra att rutorna krymper för mycket */
+    width: 2em;
+    height: 2em;
     display: inline-block;
     width: 2em;
     height: 2em;
@@ -43,6 +46,22 @@ body {
     font-size: 2em;
     text-align: center;
     vertical-align: middle;
+}
+/* Gör rutorna mindre på mobil */
+@media (max-width: 600px) {
+    .letter-box {
+        width: 1.3em;
+        height: 1.3em;
+        font-size: 1.3em;
+        margin: 0 0.1em;
+    }
+}
+
+.letter-row {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.2em;
 }
 
 html.dark-mode .letter-box {
