@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<WordList>();
 builder.Services.AddScoped<ICheckWords, CheckWords>();
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
 var app = builder.Build();
