@@ -1,0 +1,28 @@
+﻿@page
+@model Words.Pages.GameModel
+@{    
+    ViewData["Title"] = "Testspel";
+
+}
+
+@if (Model.GameVM.Stats != null && !string.IsNullOrEmpty(Model.GameVM.Stats.CurrentWord))
+{
+    <partial name="Shared/_TestGame" model="Model.GameVM" />
+}
+
+<!--<p>CurrentWord: @Model.GameVM.Stats?.CurrentWord</p> -->
+
+
+<!-- Full-width jumbotron -->
+<div class="py-5">
+    <div class="container text-center">
+        <h1 class="display-4 p-2">Hej och välkommen till testsidan för nya versioner av spelet.</h1>
+        <p class="lead">I vissa versioner finns ändringar som inte syns.</p>
+        <hr class="my-4">
+        <form method="post" asp-page-handler="NewGame">
+            <button type="submit">Nytt spel</button>
+        </form>
+    </div>
+</div>
+
+

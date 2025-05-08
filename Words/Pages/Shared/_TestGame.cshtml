@@ -1,0 +1,66 @@
+﻿@model Words.Models.GameViewModel
+
+
+@if (Model.FeedbackMessage != null)
+{
+    <div class="alert alert-danger">@Model.FeedbackMessage</div>
+}
+
+@if (Model.Stats != null && !string.IsNullOrEmpty(Model.Stats.CurrentWord))
+{
+        <div class="letter-row">
+        @for (int i = 0; i < Model.Stats.CurrentWord.Length; i++)
+            {
+            var ch = Model.Stats.CorrectGuesses.Contains(Model.Stats.CurrentWord[i]) ? Model.Stats.CurrentWord[i].ToString() : "";
+                <span class="letter-box">@ch</span>
+            }
+        </div>
+        <form method="post" asp-page-handler="Guess">
+            <div class="form-group mt-5">
+                <label for="guess">Gissa med en bokstav:</label>
+                <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control" maxlength="1" />
+            </div>
+            <button type="submit" class="btn btn-secondary mt-5">Gissa</button>
+        </form>
+
+        <div class="mt-5">
+        <p>Fel gissningar: @string.Join(", ", Model.Stats.WrongGuesses)</p>
+        <p>Rätt gissningar: @string.Join(", ", Model.Stats.CorrectGuesses)</p>
+            @* <p>Antal fel gissningar kvar: Model.MaxIncorrectGuesses - Model.IncorrectGuesses.Count</p> *@
+        </div>
+}
+    <div class="modal fade" id="winModal" tabindex="-1" aria-labelledby="winModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="winModalLabel">Grattis! Du vann!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button>
+                </div>
+                <div class="modal-body text-center">
+                <p>Du klarade ordet <strong>@Model.Stats.CurrentWord</strong>!</p>
+                    <p>Vill du spela igen?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <form method="post" asp-page-handler="StartGame">
+                        <button type="submit" class="btn btn-success">Nytt ord</button>
+                    </form>
+                    <form method="post" asp-page-handler="QuitGame">
+                        <button type="submit" class="btn btn-secondary">Nej, rensa min data.</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@if (Model.Stats.IsGameWon)
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var winModal = new bootstrap.Modal(document.getElementById('winModal'));
+                winModal.show();
+            });
+        </script>
+    }
+
+
+
