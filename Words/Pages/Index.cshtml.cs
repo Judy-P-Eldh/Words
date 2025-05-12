@@ -85,7 +85,7 @@ namespace Words.Pages
 
             if (!string.IsNullOrEmpty(Guess) && _checkWords.IsLetterSingle(Guess))
             {
-                var guess = Guess.ToLower();
+                var guess = Guess;       
                 var ch = guess[0];
 
                 if (goodGuesses.Contains(ch) || badGuesses.Contains(ch))

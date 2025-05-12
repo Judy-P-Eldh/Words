@@ -38,14 +38,15 @@ body {
     flex: 0 0 auto; /* Förhindra att rutorna krymper för mycket */
     width: 2em;
     height: 2em;
-    display: inline-block;
+    display: flex; /* För att kunna centrera texten */
     width: 2em;
     height: 2em;
     border: 2px solid #333;
     margin: 0 0.2em;
     font-size: 2em;
-    text-align: center;
-    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
 }
 /* Gör rutorna mindre på mobil */
 @media (max-width: 600px) {
@@ -80,5 +81,8 @@ html.dark-mode .card-footer {
     color: #fff; 
 }
 
+.gissningar {
+    text-transform: uppercase;
+}
 
 
