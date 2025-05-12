@@ -18,7 +18,7 @@
     <form method="post" asp-page-handler="MakeGuess">
         <div class="form-group mt-5">
             <label for="guess">Gissa med en bokstav:</label>
-            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control" maxlength="1" />
+            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" />
         </div>
         <button type="submit" class="btn btn-secondary mt-5">Gissa</button>
     </form>
@@ -45,7 +45,7 @@
                     <button type="submit" class="btn btn-success">Nytt ord</button>
                 </form>
                 <form method="post" asp-page-handler="QuitGame">
-                    <button type="submit" class="btn btn-secondary">Nej, rensa min data.</button>
+                    <button type="submit" class="btn btn-secondary">Nej, tack.</button>
                 </form>
             </div>
         </div>
