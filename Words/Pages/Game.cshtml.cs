@@ -37,8 +37,14 @@ namespace Words.Pages
         {
             GameVM.Stats = _gameService.CheckGameState();
 
+            // Blockera gissning om spelet redan är slut eller vunnet
+            if (GameVM.Stats.IsGameOver)
+            {
+                GameVM.FeedbackMessage = $"Spelet är slut. Ordet var: {GameVM.Stats.CurrentWord}";
+                return Page();
+            }
 
-            if (!_gameService.IsValidGuess(Guess[0]))
+            if (string.IsNullOrEmpty(Guess) || !_gameService.IsValidGuess(Guess[0]))
             {
                 GameVM.FeedbackMessage = "Du måste gissa en bokstav!";
             }
@@ -57,11 +63,12 @@ namespace Words.Pages
                 GameVM.FeedbackMessage = "Fel gissat!";
             }
 
-            if (_gameService.IsGameWon(GameVM.Stats))
+            // Uppdatera feedback om spelet är vunnet eller förlorat efter gissningen
+            if (GameVM.Stats.IsGameWon)
             {
                 GameVM.FeedbackMessage = "Grattis, du vann!";
             }
-            else if (_gameService.IsGameOver(GameVM.Stats))
+            else if (GameVM.Stats.IsGameOver)
             {
                 GameVM.FeedbackMessage = $"Spelet är slut. Ordet var: {GameVM.Stats.CurrentWord}";
             }

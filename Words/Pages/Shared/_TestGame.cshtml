@@ -3,8 +3,9 @@
 
 @if (Model.FeedbackMessage != null)
 {
-    <div class="alert alert-danger">@Model.FeedbackMessage</div>
+    <div class="alert alert-info">@Model.FeedbackMessage</div>
 }
+@* <p>Debug: @Model.Stats.CurrentWord</p> *@
 
 @if (Model.Stats != null && !string.IsNullOrEmpty(Model.Stats.CurrentWord))
 {
@@ -52,6 +53,30 @@
         </div>
     </div>
 
+<div class="modal fade" id="looseModal" tabindex="-1" aria-labelledby="looseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="looseModalLabel">Tyvärr! Du förlorade!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Ordet var: <strong>@Model.Stats.CurrentWord</strong>!</p>
+                <p>Vill du spela igen?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <form method="post" asp-page-handler="StartGame">
+                    <button type="submit" class="btn btn-success">Nytt ord</button>
+                </form>
+                <form method="post" asp-page-handler="QuitGame">
+                    <button type="submit" class="btn btn-secondary">Nej, rensa min data.</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @if (Model.Stats.IsGameWon)
     {
         <script>
@@ -61,6 +86,16 @@
             });
         </script>
     }
+@if (Model.Stats.IsGameOver)
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var looseModal = new bootstrap.Modal(document.getElementById('looseModal'));
+            looseModal.show();
+        });
+    </script>
+}
+
 
 
 

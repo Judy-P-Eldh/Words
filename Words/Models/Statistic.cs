@@ -7,10 +7,16 @@
         public List<char> WrongGuesses { get; set; } = new();
         public int MaxGuesses { get; set; }
         public int GuessCount => CorrectGuesses.Count + WrongGuesses.Count;
-        public bool EntireWordSuccess { get; set; } = false;
+        public bool EntireWordSuccess =>
+            !string.IsNullOrEmpty(CurrentWord) &&
+            CurrentWord
+                .ToLower()
+                .Where(char.IsLetter)
+                .Distinct()
+                .All(c => CorrectGuesses.Contains(c));
         public bool IsGameOver => GuessCount >= MaxGuesses || EntireWordSuccess;
         public bool IsGameWon => EntireWordSuccess;
 
-        //Lägg till lista för klarade ord
+        //TODO: Lägg till lista för klarade ord
     }
 }

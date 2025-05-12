@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Words.Models;
 
 namespace Words.Services
@@ -90,7 +89,6 @@ namespace Words.Services
 
         public bool IsGameWon(Statistic stats)
         {
-            // Din logik för att avgöra om spelet är vunnet
             return stats.EntireWordSuccess;
         }
 
