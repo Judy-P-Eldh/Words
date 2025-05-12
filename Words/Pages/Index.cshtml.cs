@@ -77,7 +77,7 @@ namespace Words.Pages
             GuessMade = true;
             var goodGuesses = CorrectGuesses;
             var badGuesses = IncorrectGuesses;
-            var ord = RandomWord;
+            var ord = RandomWord.ToUpperInvariant();
             if (string.IsNullOrEmpty(ord))
             {
                 Message = $"Något blev fel. Prova att starta om spelet.";
@@ -85,8 +85,9 @@ namespace Words.Pages
 
             if (!string.IsNullOrEmpty(Guess) && _checkWords.IsLetterSingle(Guess))
             {
-                var guess = Guess;       
-                var ch = guess[0];
+                var guess = Guess.ToUpperInvariant();
+                var ch = char.ToUpperInvariant(guess[0]);
+
 
                 if (goodGuesses.Contains(ch) || badGuesses.Contains(ch))
                 {
