@@ -5,7 +5,7 @@
 {
     <div class="alert alert-info">@Model.FeedbackMessage</div>
 }
-@* <p>Debug: @Model.Stats.CurrentWord</p> *@
+<p>Debug: @Model.Stats.CurrentWord</p>
 
 @if (Model.Stats != null && !string.IsNullOrEmpty(Model.Stats.CurrentWord))
 {
@@ -42,11 +42,11 @@
                     <p>Vill du spela igen?</p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <form method="post" asp-page-handler="StartGame">
+                <form method="post" asp-page-handler="NewGame">
                         <button type="submit" class="btn btn-success">Nytt ord</button>
                     </form>
                     <form method="post" asp-page-handler="QuitGame">
-                        <button type="submit" class="btn btn-secondary">Nej, rensa min data.</button>
+                        <button type="submit" class="btn btn-secondary">Nej, tack.</button>
                     </form>
                 </div>
             </div>
@@ -65,11 +65,11 @@
                 <p>Vill du spela igen?</p>
             </div>
             <div class="modal-footer justify-content-center">
-                <form method="post" asp-page-handler="StartGame">
+                <form method="post" asp-page-handler="NewGame">
                     <button type="submit" class="btn btn-success">Nytt ord</button>
                 </form>
                 <form method="post" asp-page-handler="QuitGame">
-                    <button type="submit" class="btn btn-secondary">Nej, rensa min data.</button>
+                    <button type="submit" class="btn btn-secondary">Nej, tack.</button>
                 </form>
             </div>
         </div>

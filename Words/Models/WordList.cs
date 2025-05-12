@@ -11,7 +11,7 @@
            "fyr",
            "laddstolpe",
            "lurar",
-           "strädgård",
+           "trädgård",
            "skog",
            "skogsmaskin",
            "apa",
