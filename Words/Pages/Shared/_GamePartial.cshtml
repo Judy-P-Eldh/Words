@@ -5,6 +5,7 @@
 {
     <div class="alert alert-info">@Model.Message</div>
 }
+<p>Debugg: @Model.RandomWord</p>
 
 @if (!string.IsNullOrEmpty(Model.RandomWord))
 {
@@ -18,7 +19,7 @@
     <form method="post" asp-page-handler="MakeGuess">
         <div class="form-group mt-5">
             <label for="guess">Gissa med en bokstav:</label>
-            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" />
+            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" autofocus />
         </div>
         <button type="submit" class="btn btn-secondary mt-5">Gissa</button>
     </form>

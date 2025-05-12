@@ -101,7 +101,7 @@ namespace Words.Pages
                     if (IsWordGuessed(ord, goodGuesses))
                     {
                         HasWon = true;
-                        Message = $"Grattis! Du klarade ordet \"{ord}\". Vill du spela igen?";
+                        Message = $"Grattis! Du klarade ordet \"{ord}\".";
                     }
                 }
                 else
