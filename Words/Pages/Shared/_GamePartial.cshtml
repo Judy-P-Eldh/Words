@@ -5,8 +5,8 @@
 {
     <div class="alert alert-info">@Model.Message</div>
 }
-@* <p>Debug: @Model.RandomWord</p> *@
-
+@* <p>Debug: @Model.RandomWord</p>
+ *@
 @if (!string.IsNullOrEmpty(Model.RandomWord))
 {
     <div class="letter-row">
@@ -19,14 +19,14 @@
 
     </div>
     <form method="post" asp-page-handler="MakeGuess">
-        <div class="form-group mt-5">
+        <div class="form-group mt-4">
             <label for="guess">Gissa med en bokstav:</label>
-            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input m-2" maxlength="1" autofocus />
+            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input mt-2" maxlength="1" autofocus />
         </div>
         <button type="submit" class="btn btn-secondary mt-2">Gissa</button>
     </form>
 
-    <div class="mt-5">
+    <div class="mt-4">
         <p>Fel gissningar: <span class="gissningar">@string.Join(", ", Model.IncorrectGuesses)</span></p>
         <p>Rätt gissningar: <span class="gissningar">@string.Join(", ", Model.CorrectGuesses)</span></p>
         @* <p>Antal fel gissningar kvar: Model.MaxIncorrectGuesses - Model.IncorrectGuesses.Count</p> *@
@@ -37,8 +37,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title" id="winModalLabel">Grattis! Du vann!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button>
-            </div>
+           </div>
             <div class="modal-body text-center">
                 <p>Du klarade ordet <strong>@Model.RandomWord</strong>!</p>
                 <p>Vill du spela igen?</p>
