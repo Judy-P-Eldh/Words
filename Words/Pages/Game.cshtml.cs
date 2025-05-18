@@ -12,6 +12,7 @@ namespace Words.Pages
         [BindProperty]
         public string Guess { get; set; }
         public GameViewModel GameVM { get; set; } = new GameViewModel();
+        public int GuessesLeft { get; set; }
 
         public GameModel(GameService gameService)
         {
@@ -61,6 +62,7 @@ namespace Words.Pages
             {
                 GameVM.Stats.CorrectGuesses.Add(char.ToUpper(Guess[0]));
                 GameVM.FeedbackMessage = "Rätt gissat!";
+                
             }
             else
             {

@@ -69,6 +69,13 @@ html.dark-mode .letter-box {
     border-color: #fff;
 }
 
+.guess-input {
+    width: 2.5em; /* Passande bredd för en bokstav */
+    text-align: center; /* Centrerar bokstaven i fältet */
+    font-size: 1.5em; /* Gör bokstaven lite större och lättläst */
+    text-transform: uppercase;
+}
+
 .card {
     background-color: var(--background-color) !important;
     color: var(--text-color) !important;
