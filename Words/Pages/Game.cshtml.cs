@@ -43,6 +43,11 @@ namespace Words.Pages
                 GameVM.FeedbackMessage = $"Spelet är slut. Ordet var: {GameVM.Stats.CurrentWord}";
                 return Page();
             }
+            if (GameVM.Stats.IsGameWon)
+            {
+                GameVM.FeedbackMessage = $"Grattis, du vann! Du klarade ordet: {GameVM.Stats.CurrentWord}";
+                return Page();
+            }
 
             if (string.IsNullOrEmpty(Guess) || !_gameService.IsValidGuess(Guess[0]))
             {
@@ -54,23 +59,23 @@ namespace Words.Pages
             }
             else if (_gameService.IsCorrectGuess(Guess[0], GameVM.Stats.CurrentWord))
             {
-                GameVM.Stats.CorrectGuesses.Add(char.ToLower(Guess[0]));
+                GameVM.Stats.CorrectGuesses.Add(char.ToUpper(Guess[0]));
                 GameVM.FeedbackMessage = "Rätt gissat!";
             }
             else
             {
-                GameVM.Stats.WrongGuesses.Add(char.ToLower(Guess[0]));
+                GameVM.Stats.WrongGuesses.Add(char.ToUpper(Guess[0]));
                 GameVM.FeedbackMessage = "Fel gissat!";
             }
 
             // Uppdatera feedback om spelet är vunnet eller förlorat efter gissningen
             if (GameVM.Stats.IsGameWon)
             {
-                GameVM.FeedbackMessage = "Grattis, du vann!";
+                GameVM.FeedbackMessage = $"Grattis, du vann! Du klarade ordet: {GameVM.Stats.CurrentWord}";
             }
             else if (GameVM.Stats.IsGameOver)
             {
-                GameVM.FeedbackMessage = $"Spelet är slut. Ordet var: {GameVM.Stats.CurrentWord}";
+                GameVM.FeedbackMessage = $"Tyvärr, du förlorade.";
             }
 
             _gameService.SaveStatistics(GameVM.Stats);

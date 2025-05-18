@@ -10,11 +10,11 @@
         public bool EntireWordSuccess =>
             !string.IsNullOrEmpty(CurrentWord) &&
             CurrentWord
-                .ToLower()
+                .ToUpper()
                 .Where(char.IsLetter)
                 .Distinct()
                 .All(c => CorrectGuesses.Contains(c));
-        public bool IsGameOver => GuessCount >= MaxGuesses || EntireWordSuccess;
+        public bool IsGameOver => GuessCount >= MaxGuesses; // || EntireWordSuccess;
         public bool IsGameWon => EntireWordSuccess;
 
         //TODO: Lägg till lista för klarade ord

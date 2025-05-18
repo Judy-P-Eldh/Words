@@ -12,8 +12,9 @@
         <div class="letter-row">
         @for (int i = 0; i < Model.Stats.CurrentWord.Length; i++)
             {
-            var ch = Model.Stats.CorrectGuesses.Contains(Model.Stats.CurrentWord[i]) ? Model.Stats.CurrentWord[i].ToString() : "";
-                <span class="letter-box">@ch</span>
+            var letter = char.ToUpperInvariant(Model.Stats.CurrentWord[i]);
+            var ch = Model.Stats.CorrectGuesses.Contains(letter) ? letter.ToString() : "";
+                <div class="letter-box">@ch</div>
             }
         </div>
         <form method="post" asp-page-handler="Guess">
@@ -35,7 +36,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
                     <h5 class="modal-title" id="winModalLabel">Grattis! Du vann!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button>
+                    @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button> *@
                 </div>
                 <div class="modal-body text-center">
                 <p>Du klarade ordet <strong>@Model.Stats.CurrentWord</strong>!</p>
@@ -57,11 +58,11 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="looseModalLabel">Tyvärr! Du förlorade!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button>
+                <h5 class="modal-title" id="looseModalLabel">Å nej! Du förlorade.</h5>
+                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button> *@
             </div>
             <div class="modal-body text-center">
-                <p>Ordet var: <strong>@Model.Stats.CurrentWord</strong>!</p>
+               @*  <p>Ordet var: <strong>@Model.Stats.CurrentWord</strong>!</p> *@
                 <p>Vill du spela igen?</p>
             </div>
             <div class="modal-footer justify-content-center">

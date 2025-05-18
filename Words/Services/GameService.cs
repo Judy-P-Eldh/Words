@@ -37,14 +37,14 @@ namespace Words.Services
             string randomWord;
             do
             {
-                randomWord = _wordGenerator.GetRandomWord();
+                randomWord = _wordGenerator.GetRandomWord().ToUpper();
             } while (IsWordGuessed(randomWord));
 
             var guesses = randomWord.Length < 5 ? 15 : 10;
 
             var stats = new Statistic
             {
-                CurrentWord = randomWord,
+                CurrentWord = randomWord.ToUpper(),
                 CorrectGuesses = new List<char>(),
                 WrongGuesses = new List<char>(),
                 MaxGuesses = guesses,
@@ -76,14 +76,14 @@ namespace Words.Services
         }
         public bool IsAlreadyGuessed(char guess, Statistic stats)
         {
-            char lower = char.ToLower(guess);
-            if (stats.CorrectGuesses.Contains(lower) || stats.WrongGuesses.Contains(lower)) return true;
+            char upper = char.ToUpper(guess);
+            if (stats.CorrectGuesses.Contains(upper) || stats.WrongGuesses.Contains(upper)) return true;
             else return false;
         }
 
         public bool IsCorrectGuess(char guess, string randomWord)
         {
-            if (randomWord.Contains(char.ToLower(guess))) return true;
+            if (randomWord.Contains(char.ToUpper(guess))) return true;
             else return false;
         }
 
