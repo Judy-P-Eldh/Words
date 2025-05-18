@@ -75,6 +75,12 @@ html.dark-mode .letter-box {
     font-size: 1.5em; /* Gör bokstaven lite större och lättläst */
     text-transform: uppercase;
 }
+@media (max-width: 600px) {
+    .guess-input {
+        width: 2em;
+        font-size: 1em;
+    }
+}
 
 .card {
     background-color: var(--background-color) !important;

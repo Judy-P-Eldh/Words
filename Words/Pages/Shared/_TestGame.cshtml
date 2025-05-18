@@ -30,6 +30,18 @@
         <p>Rätt gissningar: @string.Join(", ", Model.Stats.CorrectGuesses)</p>
         <div id="stats">
             <p>Antal gissningar kvar: @Model.GuessesLeft</p>
+            @for (int i = 0; i < Model.GuessesLeft; i++)
+            {
+                int critical = 3;
+                if (critical >= Model.GuessesLeft)
+                {
+                    <span style="font-size:2em; color:red;">●</span>
+                }
+                else
+                {
+                    <span style="font-size:2em; color:green;">●</span>
+                }
+            }
         </div>
 
     </div>
@@ -62,10 +74,8 @@
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title" id="looseModalLabel">Å nej! Du förlorade.</h5>
-                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button> *@
             </div>
             <div class="modal-body text-center">
-                @*  <p>Ordet var: <strong>@Model.Stats.CurrentWord</strong>!</p> *@
                 <p>Vill du spela igen?</p>
             </div>
             <div class="modal-footer justify-content-center">
