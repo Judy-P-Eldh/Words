@@ -7,6 +7,7 @@
 }
 <p>Debug: @Model.Stats.CurrentWord</p>
 
+
 @if (Model.Stats != null && !string.IsNullOrEmpty(Model.Stats.CurrentWord))
 {
     <div class="letter-row">
@@ -22,14 +23,15 @@
             <label for="guess">Gissa med en bokstav:</label>
             <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" autofocus />
         </div>
-        <button type="submit" class="btn btn-secondary mt-5">Gissa</button>
+        <button type="submit" class="btn btn-secondary mt-2">Gissa</button>
+
     </form>
 
-    <div class="mt-5">
-        <p>Fel gissningar: @string.Join(", ", Model.Stats.WrongGuesses)</p>
-        <p>Rätt gissningar: @string.Join(", ", Model.Stats.CorrectGuesses)</p>
-        <div id="stats">
-            <p>Antal gissningar kvar: @Model.GuessesLeft</p>
+    <div id="stats" class="card text-center mt-5 mb-5">
+        <div class="card-header lead">
+            Antal gissningar kvar: @Model.GuessesLeft
+        </div>
+        <div class="card-body">
             @for (int i = 0; i < Model.GuessesLeft; i++)
             {
                 int critical = 3;
@@ -43,8 +45,14 @@
                 }
             }
         </div>
-
+        <div class="card-footer text-body-secondary ">
+          
+                <p>Fel gissningar: @string.Join(", ", Model.Stats.WrongGuesses)</p>
+                <p>Rätt gissningar: @string.Join(", ", Model.Stats.CorrectGuesses)</p>
+           
+        </div>
     </div>
+
 }
 <div class="modal fade" id="winModal" tabindex="-1" aria-labelledby="winModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
