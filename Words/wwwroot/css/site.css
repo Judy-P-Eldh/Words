@@ -32,17 +32,16 @@ body {
 }
 
 .letter-box {
-    flex: 0 0 auto; /* Förhindra att rutorna krymper för mycket */
+    flex: 0 0 auto;
     width: 2em;
     height: 2em;
-    display: flex; /* För att kunna centrera texten */
-    width: 2em;
-    height: 2em;
+    display: flex;
+    align-items: center; /* Vertikal centrering */
+    justify-content: center; /* Horisontell centrering */
     border: 2px solid #333;
     margin: 0 0.2em;
     font-size: 2em;
     text-align: center;
-    vertical-align: middle;
     text-transform: uppercase;
 }
 /* Gör rutorna mindre på mobil */
