@@ -1,5 +1,7 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -10,11 +12,6 @@ html {
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
 }
 
 :root {
@@ -44,8 +41,8 @@ body {
     border: 2px solid #333;
     margin: 0 0.2em;
     font-size: 2em;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
     text-transform: uppercase;
 }
 /* Gör rutorna mindre på mobil */
@@ -69,6 +66,19 @@ html.dark-mode .letter-box {
     border-color: #fff;
 }
 
+.guess-input {
+    width: 2.5em; /* Passande bredd för en bokstav */
+    text-align: center; /* Centrerar bokstaven i fältet */
+    font-size: 1.5em; /* Gör bokstaven lite större och lättläst */
+    text-transform: uppercase;
+}
+@media (max-width: 600px) {
+    .guess-input {
+        width: 2em;
+        font-size: 1em;
+    }
+}
+
 .card {
     background-color: var(--background-color) !important;
     color: var(--text-color) !important;
@@ -80,27 +90,6 @@ html.dark-mode .card-footer {
     background-color: #2c2c2c !important; /* Ljusare mörk färg */
     color: #fff; 
 }
-
-.gissningar {
-    text-transform: uppercase;
-}
-.guess-input {
-    width: 2.5em; /* Passande bredd för en bokstav */
-    text-align: center; /* Centrerar bokstaven i fältet */
-    font-size: 1.5em; /* Gör bokstaven lite större och lättläst */
-    text-transform: uppercase;
-}
-@media (max-width: 600px) {
-    .guess-input {
-        width: 2em;
-        font-size: 1.2em;
-    }
-}
-.modal-body {
-    color: #000000; /* Svart text */
-}
-
-
 
 
 
