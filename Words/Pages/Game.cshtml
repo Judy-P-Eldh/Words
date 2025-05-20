@@ -1,7 +1,7 @@
 ﻿@page
 @model Words.Pages.GameModel
 @{    
-    ViewData["Title"] = "Testspel";
+    ViewData["Title"] = "Spela";
 
 }
 
@@ -13,22 +13,13 @@
 <!--<p>CurrentWord: @Model.GameVM.Stats?.CurrentWord</p> -->
 
 
-<!-- Full-width jumbotron -->
-<div class="py-5">
-    <div class="container text-center">
-        <h1 class="display-4 p-2">Hej och välkommen till testsidan för nya versioner av spelet.</h1>
-        <p class="lead">I vissa versioner finns ändringar som inte syns.</p>
-        <hr class="my-4">
-        <form method="post" asp-page-handler="NewGame">
-            <button type="submit">Nytt spel</button>
-        </form>
-    </div>
     <div>
         <h3 class="p-2">Regler</h3>
         <p class="lead">Du får ett antal gissningar för att gissa ett ord.</p>
         <p class ="lead">Varje prick representerar en av dina gissningar. När du är nära att förlora blir prickarna röda.</p>
-
-    </div>
 </div>
+<form method="post" asp-page-handler="NewGame">
+    <button class="btn btn-primary" type="submit">Starta nytt spel</button>
+</form>
 
 

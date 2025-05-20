@@ -5,8 +5,6 @@
 }
 
 
-<partial name="Shared/_GamePartial" model="Model" />
-
 
     <!-- Full-width jumbotron -->
     <div class="py-5">
@@ -14,14 +12,7 @@
             <h1 class="display-4 p-2">Hej och välkommen! Vi ska spela "Words".</h1>
             <p class="lead">Det går ut på att gissa rätt ord.</p>
             <hr class="my-4">
-            <form method="post" asp-page-handler="StartGame">
-                <div class="form-group">
-                    <h3 class="dsplay-4 p-2">Regler</h3>
-                    <p class="lead">Du får gissa på en bokstav i taget till dess du klarar att gissa hela ordet.</p>
-                    <p class="lead">Klicka på "Starta spelet" när du är redo att starta.</p>
-                    <button id="gameStart" type="submit" class="btn btn-success btn-lg mb-5 mt-5">Starta spelet</button>
-                </div>
-            </form>
+        <a href="/Game" class="btn btn-primary">Starta spelet</a>
         </div>
     </div>
 
