@@ -11,15 +11,15 @@ namespace Words.Services
             _wordlist = wordlist;
         }
 
-        public List<string> GetAllWords()
+        public List<WordEntry> GetAllWords()
         {
             return _wordlist.GetWords();
         }
-        public string GetRandomWord()
+        public WordEntry GetRandomWord()
         {
             return _wordlist.GetRandomWord();
         }
-        public List<string> GetWordsDone()
+        public List<WordEntry> GetWordsDone()
         {
             return _wordlist.wordsDone;
         }

@@ -34,17 +34,19 @@ namespace Words.Services
 
         public Statistic StartNewGame()
         {
-            string randomWord;
+            WordEntry randomWordEntry;
             do
             {
-                randomWord = _wordGenerator.GetRandomWord().ToUpper();
-            } while (IsWordGuessed(randomWord));
+                randomWordEntry = _wordGenerator.GetRandomWord();
+            } while (IsWordGuessed(randomWordEntry.Word));
 
+            var randomWord = randomWordEntry.Word.ToUpper();
             var guesses = randomWord.Length < 5 ? 15 : 10;
 
             var stats = new Statistic
             {
                 CurrentWord = randomWord.ToUpper(),
+                Category = randomWordEntry.Category,
                 CorrectGuesses = new List<char>(),
                 WrongGuesses = new List<char>(),
                 MaxGuesses = guesses,
@@ -58,9 +60,9 @@ namespace Words.Services
 
         public bool IsWordGuessed(string word)
         {
-            if (_wordGenerator.GetWordsDone().Contains(word)) return true;
-            else return false;
+            return _wordGenerator.GetWordsDone().Any(w => w.Word.Equals(word, StringComparison.OrdinalIgnoreCase));
         }
+
 
         public bool IsValidGuess(char guess)
         {

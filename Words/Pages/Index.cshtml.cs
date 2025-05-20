@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Cryptography;
 using System.Text.Json;
 using Words.Services;
 
@@ -65,61 +64,8 @@ namespace Words.Pages
 
         public void OnPostStartGame()
         {
-            RandomWord = _checkWords.GenerateRandomWord();
-            CorrectGuesses = new List<char>();
-            IncorrectGuesses = new List<char>();
-            if (_checkWords.IsGuessed(RandomWord)) _checkWords.GenerateRandomWord();
-            GameStarted = true;
         }
 
-        public IActionResult OnPostMakeGuess()
-        {
-            GuessMade = true;
-            var goodGuesses = CorrectGuesses;
-            var badGuesses = IncorrectGuesses;
-            var ord = RandomWord.ToUpperInvariant();
-            if (string.IsNullOrEmpty(ord))
-            {
-                Message = $"Något blev fel. Prova att starta om spelet.";
-            }
-
-            if (!string.IsNullOrEmpty(Guess) && _checkWords.IsLetterSingle(Guess))
-            {
-                var guess = Guess.ToUpperInvariant();
-                var ch = char.ToUpperInvariant(guess[0]);
-
-
-                if (goodGuesses.Contains(ch) || badGuesses.Contains(ch))
-                {
-                    Message = $"Du har redan gissat på '{ch}'!";
-                }
-                else if (ord.Contains(ch))
-                {
-                    goodGuesses.Add(ch);
-                    CorrectGuesses = goodGuesses;
-                    Message = "Bra gissat!";
-                    // Kolla om alla bokstäver är gissade
-                    if (IsWordGuessed(ord, goodGuesses))
-                    {
-                        HasWon = true;
-                        Message = $"Grattis! Du klarade ordet \"{ord}\".";
-                    }
-                }
-                else
-                {
-                    badGuesses.Add(ch);
-                    IncorrectGuesses = badGuesses;
-                    Message = "Fel gissat!";
-                    _checkWords.AddIncorrectGuess(guess, ord);
-                }
-            }
-            else
-            {
-                Message = "Skriv EN bokstav!";
-            }
-
-            return RedirectToPage();
-        }
         private bool IsWordGuessed(string word, List<char> guesses)
         {
             return word.All(c => guesses.Contains(c));

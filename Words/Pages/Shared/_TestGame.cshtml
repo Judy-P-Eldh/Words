@@ -18,14 +18,22 @@
             <div class="letter-box">@ch</div>
         }
     </div>
+
     <form method="post" asp-page-handler="Guess">
         <div class="form-group mt-5">
             <label for="guess">Gissa med en bokstav:</label>
             <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" autofocus />
         </div>
         <button type="submit" class="btn btn-secondary mt-2">Gissa</button>
-
+        <button type="submit" class="btn btn-secondary mt-2" name="action" value="hint">Visa ledtråd</button>
     </form>
+
+    @if (Model.ShowHint)
+    {
+        <div class="alert alert-warning">
+            Kategori: <strong>@Model.Stats.Category</strong>
+        </div>
+    }
 
     <div id="stats" class="card text-center mt-5 mb-5">
         <div class="card-header lead">

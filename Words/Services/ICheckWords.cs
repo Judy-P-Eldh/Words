@@ -1,11 +1,13 @@
-﻿namespace Words.Services
+﻿using Words.Models;
+
+namespace Words.Services
 {
     public interface ICheckWords
     {
-        public string GenerateRandomWord();
-        public bool IsGuessed(string word);
+        public WordEntry GenerateRandomWord();
+        public bool IsGuessed(WordEntry word);
         public bool IsLetterSingle(string input);
-        public bool IsLetterCorrect(string input, string randomWord);
-        public List<string> AddIncorrectGuess(string input, string randomWord);
+        public bool IsLetterCorrect(string input, WordEntry randomWord);
+        public List<string> AddIncorrectGuess(string input, WordEntry randomWord);
     }
 }

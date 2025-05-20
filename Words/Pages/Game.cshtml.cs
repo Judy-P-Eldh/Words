@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using Words.Models;
 using Words.Services;
 
@@ -13,6 +14,8 @@ namespace Words.Pages
         public string Guess { get; set; }
         public GameViewModel GameVM { get; set; } = new GameViewModel();
         public int GuessesLeft { get; set; }
+       
+
 
         public GameModel(GameService gameService)
         {
@@ -34,9 +37,19 @@ namespace Words.Pages
         //Om användaren vill spela igen, starta ett nytt spel.
         //Om användaren inte vill spela igen, avsluta spelet.
 
-        public IActionResult OnPostGuess()
+        public IActionResult OnPostGuess([FromForm] string action)
         {
             GameVM.Stats = _gameService.CheckGameState();
+
+            // Om spelaren klickade på "Visa ledtråd"
+            if (action == "hint")
+            {
+                GameVM.ShowHint = true;
+                // Spara state om det behövs
+                _gameService.SaveStatistics(GameVM.Stats);
+                ModelState.Clear();
+                return Page();
+            }
 
             // Blockera gissning om spelet redan är slut eller vunnet
             if (GameVM.Stats.IsGameOver)
