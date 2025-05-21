@@ -12,9 +12,9 @@ namespace Words.Pages
 
         [BindProperty]
         public string Guess { get; set; }
-        public GameViewModel GameVM { get; set; } = new GameViewModel();
-        public int GuessesLeft { get; set; }
-       
+
+        [BindProperty]
+        public GameViewModel GameVM { get; set; } = new GameViewModel();       
 
 
         public GameModel(GameService gameService)
@@ -71,7 +71,6 @@ namespace Words.Pages
             {
                 GameVM.Stats.CorrectGuesses.Add(char.ToUpper(Guess[0]));
                 GameVM.FeedbackMessage = "Rätt gissat!";
-                
             }
             else
             {
@@ -91,6 +90,44 @@ namespace Words.Pages
 
             _gameService.SaveStatistics(GameVM.Stats);
             ModelState.Clear();
+            GameVM.Guess = null;
+            return Page();
+        }
+
+        public IActionResult OnPostShowWordGuess()
+        {
+            GameVM.Stats = _gameService.CheckGameState();
+            GameVM.Stats.ShowWordGuess = true;
+            _gameService.SaveStatistics(GameVM.Stats);
+            return Page();
+        }
+
+        public IActionResult OnPostGuessWord()
+        {
+            GameVM = _gameService.GetCurrentGame(GameVM.WordGuess, null);
+
+            if (_gameService.IsCorrectWordGuess(GameVM.WordGuess, GameVM.Stats.CurrentWord))
+            {
+                // Hantera vinst: lägg till alla bokstäver i CorrectGuesses
+                GameVM.Stats.CorrectGuesses = GameVM.Stats.CurrentWord
+                    .ToUpper()
+                    .Where(char.IsLetter)
+                    .Distinct()
+                    .ToList();
+
+                GameVM.Stats.ShowWordGuess = false;
+                GameVM.FeedbackMessage = $"Grattis, du vann! Ordet var: {GameVM.Stats.CurrentWord}";
+            }
+            else
+            {
+                // Hantera endast fel här!
+                GameVM.Stats.WrongWordGuesses++;
+                GameVM.Stats.ShowWordGuess = false;
+                GameVM.FeedbackMessage = "Fel ordgissning!";
+            }
+
+            _gameService.SaveStatistics(GameVM.Stats);
+
             return Page();
         }
     }

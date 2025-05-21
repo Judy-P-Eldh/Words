@@ -14,8 +14,8 @@
     }
 </div>
 
-@* <p>Debug: @Model.Stats.CurrentWord</p>
- *@
+@* <p>Debug: @Model.Stats.CurrentWord</p> *@
+
 
 @if (Model.Stats != null && !string.IsNullOrEmpty(Model.Stats.CurrentWord))
 {
@@ -30,13 +30,36 @@
 
     <form method="post" asp-page-handler="Guess">
         <div class="form-group mt-5">
-            <label for="guess">Gissa med en bokstav:</label>
-            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" autofocus autocomplete="off"
-                   inputmode="text" />
+            <label for="guess" class="mb-2">Gissa med en bokstav:</label>
+            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" autofocus/>
         </div>
         <button type="submit" class="btn btn-secondary mt-2">Gissa</button>
         <button type="submit" class="btn btn-secondary mt-2" name="action" value="hint">Visa ledtråd</button>
     </form>
+
+    <form method="post" asp-page-handler="ShowWordGuess">
+        <button type="submit" class="btn btn-secondary mt-2">Gissa hela ordet</button>
+    </form>
+
+    
+    <div class="modal fade" id="guessWordModal" tabindex="-1" aria-labelledby="guessWordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <form method="post" asp-page-handler="GuessWord">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="guessWordModalLabel">Gör din gissning.</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <input asp-for="WordGuess" type="text" id="wordGuess" class="form-control" maxlength="@Model.Stats.CurrentWord.Length" placeholder="Gissa hela ordet" autocomplete="off" />
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-success">Gissning på hela ordet</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
 
     <div id="stats" class="card text-center mt-5 mb-5">
         <div class="card-header lead">
@@ -108,6 +131,16 @@
     </div>
 </div>
 
+@if (Model.Stats.ShowWordGuess)
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var guessWordModal = new bootstrap.Modal(document.getElementById('guessWordModal'));
+            guessWordModal.show();
+        });
+    </script>
+}
+
 
 @if (Model.Stats.IsGameWon)
 {
@@ -118,7 +151,7 @@
         });
     </script>
 }
-@if (Model.Stats.IsGameOver)
+@if (Model.Stats.IsGameOver && !Model.Stats.IsGameWon)
 {
     <script>
         document.addEventListener('DOMContentLoaded', function () {

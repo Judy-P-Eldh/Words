@@ -26,6 +26,26 @@ namespace Words.Services
             }
             return null; // Inget spel pågår
         }
+
+        public GameViewModel GetCurrentGame(string? wordGuess, char? guess)
+        {
+            // 1. Hämta statistik från sessionen, eller skapa nytt om inget finns
+            var stats = CheckGameState();
+            if (stats == null)
+            {
+                StartNewGame();
+            }
+
+            // 3. Bygg och returnera din GameViewModel
+            return new GameViewModel
+            {
+                Stats = stats,
+                WordGuess = wordGuess,
+                Guess = guess
+                // GuessesLeft räknas automatiskt utifrån Stats
+            };
+        }
+
         public void SaveStatistics(Statistic stats)
         {
             var session = _httpContextAccessor.HttpContext?.Session;
@@ -63,7 +83,6 @@ namespace Words.Services
             return _wordGenerator.GetWordsDone().Any(w => w.Word.Equals(word, StringComparison.OrdinalIgnoreCase));
         }
 
-
         public bool IsValidGuess(char guess)
         {
             if (char.IsLetter(guess)) return true;
@@ -80,6 +99,12 @@ namespace Words.Services
         {
             char upper = char.ToUpper(guess);
             if (stats.CorrectGuesses.Contains(upper) || stats.WrongGuesses.Contains(upper)) return true;
+            else return false;
+        }
+
+        public bool IsCorrectWordGuess(string wordGuess, string randomWord)
+        {
+            if (randomWord.Equals(wordGuess, StringComparison.OrdinalIgnoreCase)) return true;
             else return false;
         }
 
