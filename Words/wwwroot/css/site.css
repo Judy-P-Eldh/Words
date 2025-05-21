@@ -73,7 +73,7 @@ html.dark-mode .letter-box {
 }
 @media (max-width: 600px) {
     .guess-input {
-        width: 2em;
+        width: 2.5em;
         font-size: 1em;
     }
 }

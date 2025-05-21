@@ -22,7 +22,8 @@
     <form method="post" asp-page-handler="Guess">
         <div class="form-group mt-5">
             <label for="guess">Gissa med en bokstav:</label>
-            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" autofocus />
+            <input asp-for="Guess" type="text" id="guess" name="guess" class="form-control guess-input" maxlength="1" autofocus autocomplete="off"
+                   inputmode="text" />
         </div>
         <button type="submit" class="btn btn-secondary mt-2">Gissa</button>
         <button type="submit" class="btn btn-secondary mt-2" name="action" value="hint">Visa ledtråd</button>
@@ -123,6 +124,18 @@
             var looseModal = new bootstrap.Modal(document.getElementById('looseModal'));
             looseModal.show();
         });
+    </script>
+}
+
+
+@section Scripts {
+    <script>
+        window.onload = function() {
+            var guessInput = document.getElementById('guess');
+            if (guessInput) {
+                guessInput.focus();
+            }
+        };
     </script>
 }
 
