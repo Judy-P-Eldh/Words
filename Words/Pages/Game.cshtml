@@ -7,16 +7,15 @@
 
 @if (Model.GameVM.Stats != null && !string.IsNullOrEmpty(Model.GameVM.Stats.CurrentWord))
 {
-    <partial name="Shared/_TestGame" model="Model.GameVM" />
+            <partial name="Shared/_TestGame" model="Model.GameVM" />
 }
-
-<!--<p>CurrentWord: @Model.GameVM.Stats?.CurrentWord</p> -->
-
 
     <div>
         <h3 class="p-2">Regler</h3>
         <p class="lead">Du får ett antal gissningar för att gissa ett ord.</p>
         <p class ="lead">Varje prick representerar en av dina gissningar. När du är nära att förlora blir prickarna röda.</p>
+        <p class="lead">Du kan få en ledtråd per spelomgång.</p>
+
 </div>
 <form method="post" asp-page-handler="NewGame">
     <button class="btn btn-primary" type="submit">Starta nytt spel</button>
