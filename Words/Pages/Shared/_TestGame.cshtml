@@ -1,10 +1,19 @@
 ﻿@model Words.Models.GameViewModel
 
 
-@if (Model.FeedbackMessage != null)
-{
-    <div class="alert alert-info">@Model.FeedbackMessage</div>
-}
+<div class="message">
+    @if (Model.FeedbackMessage != null)
+    {
+        <div class="alert alert-info">@Model.FeedbackMessage</div>
+    }
+    @if (Model.Stats.ShowHint)
+    {
+        <div class="alert alert-warning">
+            Kategori: <strong>@Model.Stats.Category</strong>
+        </div>
+    }
+</div>
+
 @* <p>Debug: @Model.Stats.CurrentWord</p>
  *@
 
@@ -29,13 +38,6 @@
         <button type="submit" class="btn btn-secondary mt-2" name="action" value="hint">Visa ledtråd</button>
     </form>
 
-    @if (Model.ShowHint)
-    {
-        <div class="alert alert-warning">
-            Kategori: <strong>@Model.Stats.Category</strong>
-        </div>
-    }
-
     <div id="stats" class="card text-center mt-5 mb-5">
         <div class="card-header lead">
             Antal gissningar kvar: @Model.GuessesLeft
@@ -55,10 +57,10 @@
             }
         </div>
         <div class="card-footer text-body-secondary ">
-          
-                <p>Fel gissningar: @string.Join(", ", Model.Stats.WrongGuesses)</p>
-                <p>Rätt gissningar: @string.Join(", ", Model.Stats.CorrectGuesses)</p>
-           
+
+            <p>Fel gissningar: @string.Join(", ", Model.Stats.WrongGuesses)</p>
+            <p>Rätt gissningar: @string.Join(", ", Model.Stats.CorrectGuesses)</p>
+
         </div>
     </div>
 
@@ -68,7 +70,6 @@
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title" id="winModalLabel">Grattis! Du vann!</h5>
-                @* <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Stäng"></button> *@
             </div>
             <div class="modal-body text-center">
                 <p>Du klarade ordet <strong>@Model.Stats.CurrentWord</strong>!</p>

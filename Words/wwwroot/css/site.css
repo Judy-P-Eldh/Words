@@ -101,4 +101,10 @@ html.dark-mode .card-footer {
     gap: 0.2em;
 }
 
+.message {
+    display: flex;
+    gap: 1em; /* valfri, ger lite mellanrum mellan divarna */
+    align-items: flex-start; /* valfritt, justerar vertikalt */
+}
+
 

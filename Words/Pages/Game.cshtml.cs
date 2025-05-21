@@ -34,9 +34,6 @@ namespace Words.Pages
             return Page();
         }
 
-        //Om användaren vill spela igen, starta ett nytt spel.
-        //Om användaren inte vill spela igen, avsluta spelet.
-
         public IActionResult OnPostGuess([FromForm] string action)
         {
             GameVM.Stats = _gameService.CheckGameState();
@@ -44,8 +41,7 @@ namespace Words.Pages
             // Om spelaren klickade på "Visa ledtråd"
             if (action == "hint")
             {
-                GameVM.ShowHint = true;
-                // Spara state om det behövs
+                GameVM.Stats.ShowHint = true;
                 _gameService.SaveStatistics(GameVM.Stats);
                 ModelState.Clear();
                 return Page();

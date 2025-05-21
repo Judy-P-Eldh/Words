@@ -4,6 +4,7 @@
     {
         public string CurrentWord { get; set; } = string.Empty;
         public WordCategory Category { get; set; }
+        public bool ShowHint { get; set; }
         public List<char> CorrectGuesses { get; set; } = new();
         public List<char> WrongGuesses { get; set; } = new();
         public int MaxGuesses { get; set; }
@@ -15,7 +16,7 @@
                 .Where(char.IsLetter)
                 .Distinct()
                 .All(c => CorrectGuesses.Contains(c));
-        public bool IsGameOver => GuessCount >= MaxGuesses; // || EntireWordSuccess;
+        public bool IsGameOver => GuessCount >= MaxGuesses;
         public bool IsGameWon => EntireWordSuccess;
 
         //TODO: Lägg till lista för klarade ord

@@ -6,6 +6,5 @@
         public string? FeedbackMessage { get; set; }
         public char? Guess { get; set; }
         public int GuessesLeft => Stats?.MaxGuesses - Stats?.GuessCount ?? 0;
-        public bool ShowHint { get; set; }
     }
 }
